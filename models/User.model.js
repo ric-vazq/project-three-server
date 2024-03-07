@@ -14,9 +14,34 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
-    name: {
+    firstName: {
       type: String,
-      required: [true, "Name is required."],
+      required: [true, "First name is required."],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last name is required."],
+    },
+    profilePic: {
+      type: String,
+      default:
+        "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg",
+    },
+    favMeals: [{ type: Schema.Types.ObjectId, ref: "Meals" }],
+    favIngredients: [{ type: Schema.Types.ObjectId, ref: "Ingredients" }],
+    confirmationCode: {
+      type: String,
+      unique: true,
+    },
+    status: {
+      type: String,
+      enum: ["Pending Confirmation", "Active"],
+      default: "Pending Confirmation",
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
   {
