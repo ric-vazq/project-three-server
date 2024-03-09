@@ -140,6 +140,10 @@ router.post("/login", async (req, res, next) => {
       res.status(401).json({ message: "User not found." });
       return;
     }
+    if (foundUser.status === "Pending Confirmation") {
+      res.status(400).json({ message: "User email not yet confirmed" });
+      return;
+    }
 
     const passwordCorrect = await bcrypt.compareSync(
       password,
