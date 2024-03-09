@@ -132,7 +132,7 @@ router.post("/login", async (req, res, next) => {
       return;
     }
 
-    const foundUser = User.findOne({ email });
+    const foundUser = await User.findOne({ email });
 
     // Check the users collection if a user with the same email exists
     if (!foundUser) {
