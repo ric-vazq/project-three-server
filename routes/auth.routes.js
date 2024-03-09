@@ -119,7 +119,7 @@ router.post("/signup", async (req, res, next) => {
     next(error);
   }
 });
-//Tested and working with Thunderclient
+//Tested and working with Thunderclient; Verified with MongoDB Compass
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 router.post("/login", async (req, res, next) => {
@@ -188,7 +188,7 @@ router.get("/verify", isAuthenticated, async (req, res, next) => {
 router.get("/confirm/:confirmationCode", async (req, res, next) => {
   try {
     const { confirmationCode } = req.params;
-    console.log(confirmationCode);
+    // console.log(confirmationCode);
     const foundUser = await User.findOneAndUpdate(
       { confirmationCode: confirmationCode },
       { status: "Active" },
