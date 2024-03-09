@@ -67,6 +67,7 @@ router.post("/signup", async (req, res, next) => {
       res.status(400).json({
         message: "Passwords did not match exactly. Please try again.",
       });
+      return;
     }
 
     // Check the users collection if a user with the same email already exists
@@ -168,6 +169,7 @@ router.post("/login", async (req, res, next) => {
       res.status(200).json({ authToken: authToken });
     } else {
       res.status(401).json({ message: "Unable to authenticate the user" });
+      return;
     }
   } catch (error) {
     next(error);
