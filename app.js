@@ -22,7 +22,10 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const mealRoutes = require("./routes/meal.routes");
-app.use("meal", mealRoutes);
+app.use("/meal", mealRoutes);
+
+const ingredientRoutes = require("./routes/ingredient.routes");
+app.use("/ingredient", ingredientRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
