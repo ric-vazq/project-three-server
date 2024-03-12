@@ -6,7 +6,7 @@ const ingredientSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
-    image: {
+    imageUrl: {
       type: String,
       required: [true, "Image is required."],
     },
@@ -15,7 +15,7 @@ const ingredientSchema = new Schema(
       default: 100,
     },
     calories: Number,
-    protein: Number,
+    proteins: Number,
     fats: Number,
     carbs: Number,
   },
