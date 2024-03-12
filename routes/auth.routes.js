@@ -204,11 +204,11 @@ router.get("/confirm/:confirmationCode", async (req, res, next) => {
     if (!foundUser) {
       res
         .status(401)
-        .json({ message: "Something went wrong, please try again." });
+        .json({ message: "Something went wrong, please try again." })
       return;
     }
 
-    return res.status(200).json({ status: foundUser.status });
+    return res.render('email');
   } catch (error) {
     next(error);
   }
