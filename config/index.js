@@ -13,6 +13,8 @@ const cookieParser = require("cookie-parser");
 // unless the request is made from the same domain, by default express wont accept POST requests
 const cors = require("cors");
 
+const path = require("path");
+
 const FRONTEND_URL = process.env.ORIGIN;
 
 // Middleware configuration
@@ -35,4 +37,8 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
+
+  app.set("views", path.join(__dirname, "..", "views"));
+  app.set("view engine", "hbs");
+  app.use(express.static(path.join(__dirname, "..", "public")));
 };

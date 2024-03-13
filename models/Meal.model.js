@@ -7,7 +7,7 @@ const mealSchema = new Schema(
       required: [true, "Name is required"],
       unique: true,
     },
-    image: {
+    imageUrl: {
       type: String,
     },
     ingredients: [
