@@ -3,12 +3,11 @@ const router = express.Router();
 const fileUploader = require("../config/cloudinary.config");
 const User = require("../models/User.model");
 const Meal = require("../models/Meal.model");
-const Ingredient = require("../models/Ingredient.model");
 
 // GET all Meals
-router.get("/", async (req, res, next) => {
+router.get("/all-meals", async (req, res, next) => {
   try {
-    const meals = await Meal.find().populate("Ingredient");
+    const meals = await Meal.find().populate("ingredients");
     return res.status(200).json({ meals: meals });
   } catch (error) {
     next(error);
@@ -52,7 +51,7 @@ router.post("/create-new-meal", async (req, res, next) => {
 router.get("/:mealId", async (req, res, next) => {
   try {
     const { mealId } = req.params;
-    const foundMeal = await Meal.findById(mealId).populate("Ingredient");
+    const foundMeal = await Meal.findById(mealId).populate("ingredients");
     if (!foundMeal) {
       res.status(400).json({ message: "The desired meal could not be found." });
       return;
@@ -63,8 +62,8 @@ router.get("/:mealId", async (req, res, next) => {
   }
 });
 
-router.put('/:mealId/edit', (req, res, next) => {
-    console.log(req.body);
-})
+router.put("/:mealId/edit", (req, res, next) => {
+  console.log(req.body);
+});
 
 module.exports = router;
