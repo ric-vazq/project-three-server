@@ -6,7 +6,7 @@ const Meal = require("../models/Meal.model");
 // GET all Meals
 router.get("/all-meals", async (req, res, next) => {
   try {
-    const meals = await Meal.find().populate("ingredients");
+    const meals = await Meal.find().populate("Ingredients");
     return res.status(200).json({ meals: meals });
   } catch (error) {
     next(error);

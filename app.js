@@ -25,7 +25,7 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const contactRoutes = require("./routes/contact.routes");
-app.use("/", contactRoutes);
+app.use("/contact", contactRoutes);
 
 const mealRoutes = require("./routes/meal.routes");
 app.use("/meal", mealRoutes);
