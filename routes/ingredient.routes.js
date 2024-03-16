@@ -46,9 +46,7 @@ router.get("/:ingredientId", async (req, res, next) => {
   try {
     const { ingredientId } = req.params;
     const foundIngredient = await Ingredient.findById(ingredientId);
-    if (!foundIngredient) {
-      return res.status(400).json({ message: "Ingredient not found"});
-    }
+    console.log("foundIngredient", foundIngredient)
     return res.status(200).json(foundIngredient);
   } catch (error) {
     next(error)
