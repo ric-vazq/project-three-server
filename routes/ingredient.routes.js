@@ -46,24 +46,28 @@ router.get("/:ingredientId", async (req, res, next) => {
   try {
     const { ingredientId } = req.params;
     const foundIngredient = await Ingredient.findById(ingredientId);
-    console.log("foundIngredient", foundIngredient)
+    console.log("foundIngredient", foundIngredient);
     return res.status(200).json(foundIngredient);
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
 
 router.put("/:ingredientId/edit", async (req, res, next) => {
   try {
-    const { ingredientId } = req.params; 
-    const {name, calories, proteins, fats, carbs, imageUrl } = req.body; 
+    const { ingredientId } = req.params;
+    const { name, calories, proteins, fats, carbs, imageUrl } = req.body;
 
-    const updatedIngredient = await Ingredient.findByIdAndUpdate(ingredientId, req.body, {new: true});
+    const updatedIngredient = await Ingredient.findByIdAndUpdate(
+      ingredientId,
+      req.body,
+      { new: true }
+    );
     console.log(updatedIngredient);
-    return res.status(200).json(updatedIngredient)
+    return res.status(200).json(updatedIngredient);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 module.exports = router;

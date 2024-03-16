@@ -32,10 +32,12 @@ router.post("/create-new-meal", async (req, res, next) => {
   try {
     const {
       name,
-      image,
-      protein,
+      imageUrl,
+      ingredients,
+      proteins,
       fats,
       carbs,
+      calories,
       cookingInstructions,
       description,
       creator,
@@ -62,8 +64,32 @@ router.get("/:mealId", async (req, res, next) => {
   }
 });
 
-router.put("/:mealId/edit", (req, res, next) => {
-  console.log(req.body);
+router.put("/:mealId/edit", async (req, res, next) => {
+  try {
+    const { mealId } = req.params;
+    const {
+      name,
+      imageUrl,
+      ingredients,
+      proteins,
+      fats,
+      carbs,
+      cookingInstructions,
+      description,
+    } = req.body;
+
+    const updatedMeal = await Meal.findByIdAndUpdate(
+      mealId, 
+      req.body, 
+      { new:true }
+    );
+
+    console.log(updatedMeal);
+
+    return res.status(200).json(updatedMeal)
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
