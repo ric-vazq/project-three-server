@@ -36,7 +36,6 @@ router.post("/send-email", async (req, res, next) => {
       // to: "cabioch.brice@gmail.com", // For testing
       to: "brckdup@gmail.com",
       subject: subject,
-      text: message,
       html: `
       <html>
       <head>
