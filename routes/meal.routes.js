@@ -7,11 +7,23 @@ const Meal = require("../models/Meal.model");
 router.get("/all-meals", async (req, res, next) => {
   try {
     const meals = await Meal.find().populate({
-      path: 'ingredients',
+      path: "ingredients",
       populate: {
-        path: 'item'
-      }
+        path: "item",
+      },
     });
+    return res.status(200).json({ meals: meals });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET all Meals by ingredient
+router.get("/meals-by-ingredient/:ingredientId", async (req, res, next) => {
+  try {
+    const { ingredientId } = req.params;
+    const meals = await Meal.find({ "ingredients.item": ingredientId });
+    console.log("found meals: ", meals);
     return res.status(200).json({ meals: meals });
   } catch (error) {
     next(error);
@@ -82,15 +94,13 @@ router.put("/:mealId/edit", async (req, res, next) => {
       description,
     } = req.body;
 
-    const updatedMeal = await Meal.findByIdAndUpdate(
-      mealId, 
-      req.body, 
-      { new:true }
-    );
+    const updatedMeal = await Meal.findByIdAndUpdate(mealId, req.body, {
+      new: true,
+    });
 
     console.log(updatedMeal);
 
-    return res.status(200).json(updatedMeal)
+    return res.status(200).json(updatedMeal);
   } catch (error) {
     next(error);
   }
