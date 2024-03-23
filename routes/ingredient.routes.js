@@ -71,7 +71,7 @@ router.put("/:ingredientId/edit", async (req, res, next) => {
 });
 
 // DELETE an ingredient
-router.delete("/:ingredientId/delete", async (req, res, next) => {
+router.post("/:ingredientId/delete", async (req, res, next) => {
   try {
     const { ingredientId } = req.params;
     const foundIngredient = await Ingredient.findById(ingredientId);
