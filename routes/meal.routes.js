@@ -108,7 +108,7 @@ router.put("/:mealId/edit", async (req, res, next) => {
 });
 
 // DELETE a meal
-router.post("/:mealId/delete", async (req, res, next) => {
+router.delete("/:mealId/delete", async (req, res, next) => {
   try {
     const { mealId } = req.params;
     const foundMeal = await Meal.findById(mealId);
