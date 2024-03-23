@@ -69,7 +69,8 @@ router.post("/create-new-meal", async (req, res, next) => {
 router.get("/:mealId", async (req, res, next) => {
   try {
     const { mealId } = req.params;
-    const foundMeal = await Meal.findById(mealId).populate("ingredients");
+    const foundMeal = await Meal.findById(mealId).populate("ingredients.item")
+    //console.log(JSON.stringify(foundMeal));
     if (!foundMeal) {
       res.status(400).json({ message: "The desired meal could not be found." });
       return;
