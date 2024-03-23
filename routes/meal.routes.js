@@ -69,7 +69,7 @@ router.post("/create-new-meal", async (req, res, next) => {
 router.get("/:mealId", async (req, res, next) => {
   try {
     const { mealId } = req.params;
-    const foundMeal = await Meal.findById(mealId).populate("ingredients.item")
+    const foundMeal = await Meal.findById(mealId).populate("ingredients.item");
     //console.log(JSON.stringify(foundMeal));
     if (!foundMeal) {
       res.status(400).json({ message: "The desired meal could not be found." });
@@ -102,6 +102,24 @@ router.put("/:mealId/edit", async (req, res, next) => {
     console.log(updatedMeal);
 
     return res.status(200).json(updatedMeal);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// DELETE a meal
+router.delete("/:mealId/delete", async (req, res, next) => {
+  try {
+    const { mealId } = req.params;
+    const foundMeal = await Meal.findById(mealId);
+    if (!foundMeal) {
+      res.status(400).json({ message: "The desired meal could not be found." });
+      return;
+    }
+    // Delete the meal
+    await Meal.findByIdAndDelete(mealId);
+    res.status(200).json({ message: "Meal deleted successfully" });
+    return;
   } catch (error) {
     next(error);
   }

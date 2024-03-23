@@ -70,4 +70,24 @@ router.put("/:ingredientId/edit", async (req, res, next) => {
   }
 });
 
+// DELETE an ingredient
+router.delete("/:ingredientId/delete", async (req, res, next) => {
+  try {
+    const { ingredientId } = req.params;
+    const foundIngredient = await Ingredient.findById(ingredientId);
+    if (!foundIngredient) {
+      res
+        .status(400)
+        .json({ message: "The desired ingredient could not be found." });
+      return;
+    }
+    // Delete the ingredient
+    await Ingredient.findByIdAndDelete(ingredientId);
+    res.status(200).json({ message: "Ingredient deleted successfully" });
+    return;
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
