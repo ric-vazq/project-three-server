@@ -34,7 +34,7 @@ router.post("/send-email", async (req, res, next) => {
     const confirmMail = await transporter.sendMail({
       from: "VegEase Planner",
       // to: "cabioch.brice@gmail.com", // For testing
-      to: "brckdup@gmail.com",
+      to: "veganease.planner@gmail.com",
       subject: subject,
       html: `
       <html>

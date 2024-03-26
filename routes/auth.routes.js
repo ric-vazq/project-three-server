@@ -99,31 +99,13 @@ router.post("/signup", async (req, res, next) => {
           <title>Confirmation Email</title>
       </head>
       <body>
-      <div style="text-align: center; display: flex;flex-direction: column; align-items: center; justify-content: center; height: 100dvh; width: 100dvw;">
+      <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100dvh; width: 100dvw; color: white; background-color: green">
           <h2>${createdUser.firstName}, you are one step closer to Ease!</h2>
           <p>Confirm your email below:</p>
-          <a href="http://localhost:5005/auth/confirm/${createdUser.confirmationCode}" style="text-decoration: none; background-color: rgb(93 187 99); padding: 1rem 2rem; color: white;">VeganEase</a>
+          <a href="https://veganease-api.onrender.com/auth/confirm/${createdUser.confirmationCode}" style="text-decoration: none; background-color: rgb(93 187 99); padding: 1rem 2rem; color: white;">VeganEase</a>
       </div>
       </body>
       </html>`,
-      /*html: `
-      <html>
-      <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-      </head>
-      <body>
-      <div class="container text-center">
-      <h2>Click the link to activate your account</h2> 
-      <a href="http://localhost:5005/auth/confirm/${createdUser.confirmationCode}">Verify Account</a>
-      </div>
-      </body>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-      </html>
-      `,*/
     });
 
     const user = { email, firstName, lastName, _id: createdUser._id };
@@ -165,7 +147,16 @@ router.post("/login", async (req, res, next) => {
     );
 
     if (passwordCorrect) {
-      const { _id, firstName, lastName, status, role, profilePic } = foundUser;
+      const {
+        _id,
+        firstName,
+        lastName,
+        status,
+        role,
+        profilePic,
+        favMeals,
+        favIngredients,
+      } = foundUser;
       // Create an object that will be set as the token payload
       const payload = {
         _id,
@@ -175,6 +166,8 @@ router.post("/login", async (req, res, next) => {
         status,
         role,
         profilePic,
+        favMeals,
+        favIngredients,
       };
 
       // Create a JSON Web Token and sign it

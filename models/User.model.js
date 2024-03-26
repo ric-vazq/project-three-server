@@ -27,8 +27,8 @@ const userSchema = new Schema(
       default:
         "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg",
     },
-    favMeals: [{ type: Schema.Types.ObjectId, ref: "Meals" }],
-    favIngredients: [{ type: Schema.Types.ObjectId, ref: "Ingredients" }],
+    favMeals: [{ type: Schema.Types.ObjectId, ref: "Meal" }],
+    favIngredients: [{ type: Schema.Types.ObjectId, ref: "Ingredient" }],
     confirmationCode: {
       type: String,
       unique: true,

@@ -1,6 +1,30 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User.model");
+const fileUploader = require("../config/cloudinary.config");
+
+// GET Favorites
+router.get("/:userId/favorite-meals", async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const foundUser = await User.findById(userId).populate("favMeals");
+    res.status(200).json({ favMeals: foundUser.favMeals });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/:userId/favorite-ingredients", async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const foundUser = await User.findById(userId).populate("favIngredients");
+    res.status(200).json({ favIngredients: foundUser.favIngredients });
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Add meals to favorites
 router.post("/:userId/favorites/meals", async (req, res) => {
@@ -126,5 +150,29 @@ router.delete(
     }
   }
 );
+
+router.post(
+  "/image-upload",
+  fileUploader.single("profilePic"),
+  (req, res, next) => {
+    if (!req.file) {
+      next(new Error("No file uploaded!"));
+      return;
+    }
+    res.json({ fileUrl: req.file.path });
+  }
+);
+
+router.put("/:userId/edit-user", async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+      new: true,
+    });
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

@@ -56,7 +56,6 @@ router.get("/:ingredientId", async (req, res, next) => {
 router.put("/:ingredientId/edit", async (req, res, next) => {
   try {
     const { ingredientId } = req.params;
-    const { name, calories, proteins, fats, carbs, imageUrl } = req.body;
 
     const updatedIngredient = await Ingredient.findByIdAndUpdate(
       ingredientId,
