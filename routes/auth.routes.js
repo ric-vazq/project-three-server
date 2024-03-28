@@ -91,21 +91,7 @@ router.post("/signup", async (req, res, next) => {
       from: "VegEase Planner",
       to: email,
       subject: "Confirm your new VegEase account.",
-      html: `
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Confirmation Email</title>
-      </head>
-      <body>
-      <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100dvh; width: 100dvw; color: white; background-color: green">
-          <h2>${createdUser.firstName}, you are one step closer to Ease!</h2>
-          <p>Confirm your email below:</p>
-          <a href="https://veganease-api.onrender.com/auth/confirm/${createdUser.confirmationCode}" style="text-decoration: none; background-color: rgb(93 187 99); padding: 1rem 2rem; color: white;">VeganEase</a>
-      </div>
-      </body>
-      </html>`,
+      text: `Confirm your email by clicking on the link: https://veganease-api.onrender.com/auth/confirm/${createdUser.confirmationCode}  !`
     });
 
     const user = { email, firstName, lastName, _id: createdUser._id };
